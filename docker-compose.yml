@@ -1,0 +1,17 @@
+services:
+  backend-app:
+    build: ./src/backend
+    container_name: badminton-backend
+    ports:
+      - "4000:4000" 
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb+srv://nmkha23_db_user:CyKcI4trCHBFH4uA@badmintondevops.gvc1h1a.mongodb.net/
+
+  frontend-app:
+    build: ./src/frontend
+    container_name: badminton-frontend
+    ports:
+      - "3000:80" 
+    depends_on:
+      - backend-app 
