@@ -1,0 +1,26 @@
+name: Deploy E-Commerce App to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the latest source code
+        uses: actions/checkout@v4
+
+      - name: Deployment via SSH to AWS EC2
+        uses: appleboy/ssh-agent@v1.0.3
+        with:
+          hosts: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USERNAME }}
+          ssh-key: ${{ secrets.AWS_EC2_SSH_KEY }}
+          script: |
+            cd ~/Badminton-Web-App
+            git pull origin main
+            docker-compose up -d --build
+            docker images prune -f
