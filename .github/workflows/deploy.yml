@@ -16,11 +16,11 @@ jobs:
       - name: Deployment via SSH to AWS EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
-          hosts: ${{ secrets.AWS_EC2_HOST }}
+          host: ${{ secrets.AWS_EC2_HOST }}
           username: ${{ secrets.AWS_EC2_USERNAME }}
-          ssh-key: ${{ secrets.AWS_EC2_SSH_KEY }}
+          key: ${{ secrets.AWS_EC2_SSH_KEY }}
           script: |
             cd ~/Badminton-Web-App
             git pull origin main
-            docker-compose up -d --build
-            docker images prune -f
+            docker compose up -d --build
+            docker image prune -f
