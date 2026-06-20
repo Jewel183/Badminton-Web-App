@@ -1,5 +1,5 @@
 export const getProfile = async (token) => {
-  const res = await fetch("http://localhost:4000/api/users/profile", {
+  const res = await fetch("/api/users/profile", {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -8,7 +8,7 @@ export const getProfile = async (token) => {
 };
 
 export const updateProfile = async (token, payload) => {
-  const res = await fetch("http://localhost:4000/api/users/profile", {
+  const res = await fetch("/api/users/profile", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const updateProfile = async (token, payload) => {
 };
 
 export const getAllUsers = async (token) => {
-  const res = await fetch("http://localhost:4000/api/users/", {
+  const res = await fetch("/api/users/", {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) throw new Error("Không thể tải danh sách người dùng");
@@ -34,7 +34,7 @@ export const getAllUsers = async (token) => {
 };
 
 export const deleteUser = async (id, token) => {
-  const res = await fetch(`http://localhost:4000/api/users/${id}`, {
+  const res = await fetch(`/api/users/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -46,7 +46,7 @@ export const deleteUser = async (id, token) => {
 };
 
 export const toggleUserStatus = async (id, token) => {
-  const res = await fetch(`http://localhost:4000/api/users/status/${id}`, {
+  const res = await fetch(`/api/users/status/${id}`, {
     method: "PATCH",
     headers: { Authorization: `Bearer ${token}` },
   });

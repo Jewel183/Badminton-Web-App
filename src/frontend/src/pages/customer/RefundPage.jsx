@@ -7,7 +7,7 @@ import { usePopup } from "../../components/common/popupContext"
 export default function ReturnRefundForm({ order, onSubmit, onBack }) {
   const [showSuccess, setShowSuccess] = useState(false)
   const [formData, setFormData] = useState({
-    request: "", // This field is commented out in the original, but kept for structure
+    request: "",
     reason: "",
     description: "",
   })
@@ -15,9 +15,8 @@ export default function ReturnRefundForm({ order, onSubmit, onBack }) {
   const { showPopup } = usePopup()
 
   const handleSend = async () => {
-    // Logic to send the request and update the order
     try {
-      const response = await fetch(`http://localhost:4000/api/order/${order._id}/request-return-refund`, {
+      const response = await fetch(`/api/order/${order._id}/request-return-refund`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -35,9 +34,8 @@ export default function ReturnRefundForm({ order, onSubmit, onBack }) {
           status: "Yêu cầu trả hàng/hoàn tiền",
         }
         setShowSuccess(true)
-        onSubmit(updatedOrder) // Notify parent component about the update
+        onSubmit(updatedOrder)
       } else {
-        // alert("Có lỗi xảy ra khi gửi yêu cầu trả hàng/hoàn tiền.")
         showPopup(
           'Lỗi',
           'Có lỗi xảy ra khi gửi yêu cầu trả hàng/hoàn tiền',
@@ -49,7 +47,6 @@ export default function ReturnRefundForm({ order, onSubmit, onBack }) {
       }
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu trả hàng/hoàn tiền:", error)
-      // alert("Có lỗi xảy ra khi gửi yêu cầu trả hàng/hoàn tiền.")
       showPopup(
         'Lỗi',
         error.message || 'Có lỗi xảy ra khi gửi yêu cầu trả hàng/hoàn tiền',

@@ -2,7 +2,7 @@ export const loginUser = async ({ emailOrPhone, password }) => {
   const isEmail = emailOrPhone.includes("@");
   const loginType = isEmail ? "email" : "phone";
 
-  const res = await fetch(`http://localhost:4000/api/auth/login`, {
+  const res = await fetch("/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ [loginType]: emailOrPhone, password }),
@@ -23,7 +23,7 @@ export const loginUser = async ({ emailOrPhone, password }) => {
 };
 
 export const registerUser = async (data) => {
-  const res = await fetch(`http://localhost:4000/api/auth/register`, {
+  const res = await fetch("/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -40,7 +40,7 @@ export const registerUser = async (data) => {
 };
 
 export const verifyOtp = async ({ email, otp }) => {
-  const res = await fetch(`http://localhost:4000/api/auth/verify-email`, {
+  const res = await fetch("/api/auth/verify-email", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, otp }),
@@ -57,7 +57,7 @@ export const verifyOtp = async ({ email, otp }) => {
 };
 
 export const requestPasswordReset = async (email) => {
-  const res = await fetch("http://localhost:4000/api/auth/forgot-password", {
+  const res = await fetch("/api/auth/forgot-password", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email }),
@@ -70,7 +70,7 @@ export const requestPasswordReset = async (email) => {
 };
 
 export const resetPassword = async (email, token, newPassword) => {
-  const res = await fetch("http://localhost:4000/api/auth/recover-password", {
+  const res = await fetch("/api/auth/recover-password", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, token, newPassword }),

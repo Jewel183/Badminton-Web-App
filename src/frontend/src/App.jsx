@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useEffect, useState, Fragment } from "react";
 import { Routes, Route, Navigate, useNavigate,ScrollRestoration } from "react-router-dom";
 import { publicRoutes, privateRoutes } from "./routes/index";
@@ -21,12 +20,12 @@ function AppContent() {
     }
 
     try {
-      const res = await fetch("http://localhost:4000/api/users/profile", {
+      const res = await fetch("/api/users/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       if (res.status === 403) {
-        const adminRes = await fetch("http://localhost:4000/api/users/admin-profile", {
+        const adminRes = await fetch("/api/users/admin-profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!adminRes.ok) throw new Error("Không thể lấy thông tin admin");

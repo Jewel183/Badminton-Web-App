@@ -1,7 +1,7 @@
 export const getProductBySlug = async (slug, view = 'public') => {
     if (!slug) throw new Error("Slug không được để trống.");
     
-    const response = await fetch(`http://localhost:4000/api/products/${slug}?view=${view}`); 
+    const response = await fetch(`/api/products/${slug}?view=${view}`); 
     
     if (!response.ok) {
         const errorData = await response.json();
@@ -18,14 +18,14 @@ export const getProductsOnQuery = async (queryParams = {}) => {
         
     });
 
-    const response = await fetch(`http://localhost:4000/api/products?${params.toString()}`);
+    const response = await fetch(`/api/products?${params.toString()}`);
     if (!response.ok) throw new Error('Không thể tải sản phẩm.');
 
     return await response.json();
 };
 
 export const addProduct = async (productPayload) => {
-    const res = await fetch(`http://localhost:4000/api/products`, {
+    const res = await fetch("/api/products", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export const addProduct = async (productPayload) => {
 
 
 export const deleteProduct = async (slug) => {
-    const response = await fetch(`http://localhost:4000/api/products/${slug}`, {
+    const response = await fetch(`/api/products/${slug}`, {
         method: 'DELETE',
     });
 
@@ -57,7 +57,7 @@ export const deleteProduct = async (slug) => {
 
 
 export const togglePublishProduct = async (slug) => {
-    const response = await fetch(`http://localhost:4000/api/products/${slug}/toggle-publish`, {
+    const response = await fetch(`/api/products/${slug}/toggle-publish`, {
         method: 'PATCH',
     });
 
@@ -70,7 +70,7 @@ export const togglePublishProduct = async (slug) => {
 };
 export const editProduct = async (slug, updatedData) => {
     if (!slug) throw new Error("Slug is required for editing.");
-    const res = await fetch(`http://localhost:4000/api/products/${slug}`, {
+    const res = await fetch(`/api/products/${slug}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData)
@@ -84,7 +84,7 @@ export const editProduct = async (slug, updatedData) => {
 };
 
 export const fetchSaleProducts = async () => {
-    const res = await fetch('http://localhost:4000/api/products/sale-off', {
+    const res = await fetch("/api/products/sale-off", {
         method: 'GET',
         headers: { 'Content-Type': 'application/json'}
     });

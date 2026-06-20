@@ -1,0 +1,42 @@
+# 1. Dependencies và Logs cục bộ
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+pnpm-debug.log
+
+# 2. Biến môi trường và cấu hình bảo mật
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# 3. Thư mục biên dịch mã nguồn (Build Artifacts)
+dist/
+build/
+out/
+
+# 4. Hệ thống quản lý mã nguồn và cấu hình hạ tầng
+.git/
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# 5. Cấu hình Trình soạn thảo mã và IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# 6. Các tệp tin rác của Hệ điều hành
+.DS_Store
+Thumbs.db
+
+# 7. Tài liệu kỹ thuật
+README.md
+docs/

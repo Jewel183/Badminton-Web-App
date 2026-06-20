@@ -4,7 +4,7 @@ export const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append('image', file);
     
-    const response = await fetch(`http://localhost:4000/api/upload/image`, { 
+    const response = await fetch("/api/upload/image", { 
         method: 'POST', 
         body: formData 
     });
@@ -20,7 +20,7 @@ export const uploadImage = async (file) => {
 export const deleteImage = async (public_id) => {
     if (!public_id) throw new Error("Cần có public_id để xóa ảnh.");
 
-    const response = await fetch(`http://localhost:4000/api/upload/image`, {
+    const response = await fetch("/api/upload/image", {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ public_id }),

@@ -98,7 +98,7 @@ const DropdownMenu = () => {
 
         return (
             <div className="dropdown-column" key={category.slug}>
-                <Link to={categoryUrl} end className="dropdown-title">
+                <Link to={categoryUrl} className="dropdown-title">
                     {category.name.toUpperCase()}
                 </Link>
                 <ul className="dropdown-list">
@@ -106,12 +106,12 @@ const DropdownMenu = () => {
                         const brandUrl = `/products?categories=${category.slug}&brands=${brand.slug}`;
                         return (
                             <li key={brand.slug}>
-                                <Link to={brandUrl} end>{`${category.name} ${brand.name}`} </Link>
+                                <Link to={brandUrl}>{`${category.name} ${brand.name}`} </Link>
                             </li>
                         );
                     })}
                     {hasMoreBrands && (
-                        <li><Link to={categoryUrl} end className="more-link">Xem thêm</Link></li>
+                        <li><Link to={categoryUrl} className="more-link">Xem thêm</Link></li>
                     )}
                 </ul>
             </div>

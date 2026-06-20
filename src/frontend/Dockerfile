@@ -1,4 +1,4 @@
-FROM node:18-alpine AS build-stage
+FROM node:20-alpine AS build-stage
 
 WORKDIR /app
 
@@ -10,10 +10,14 @@ COPY . .
 
 RUN npm run build
 
-
+# --- STAGE NGINX ---
 FROM nginx:alpine
 
-COPY --from=build-stage /app/build /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 

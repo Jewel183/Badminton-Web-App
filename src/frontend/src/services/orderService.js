@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:4000/api/order";
+const BASE_URL = "/api/order";
 // const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
 export const createOrder = async (orderData) => {

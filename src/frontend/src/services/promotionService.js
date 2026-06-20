@@ -2,7 +2,7 @@ export const createPromotion = async (promotionData) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     if (!token) return;
 
-  const res = await fetch('http://localhost:4000/api/promotions', {
+  const res = await fetch("/api/promotions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const getAllPromotions = async () => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     if (!token) return;
     
-  const res = await fetch('http://localhost:4000/api/promotions', {
+  const res = await fetch("/api/promotions", {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ export const getPromotionById = async(promotionId) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (!token) return;
 
-  const res = await fetch(`http://localhost:4000/api/promotions/${promotionId}`, {
+  const res = await fetch(`/api/promotions/${promotionId}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ export const deletePromotion = async (promotionId) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (!token) return;
 
-  const res = await fetch(`http://localhost:4000/api/promotions/${promotionId}`, {
+  const res = await fetch(`/api/promotions/${promotionId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -81,7 +81,7 @@ export const addCodeToPromotion = async (promotionId, codes) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     if (!token) return;
 
-  const res = await fetch(`http://localhost:4000/api/promotions/${promotionId}/codes/add`, {
+  const res = await fetch(`/api/promotions/${promotionId}/codes/add`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -101,7 +101,7 @@ export const addProductToPromotion = async ({ promotionId, productId, code }) =>
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (!token) return; 
 
-  const res = await fetch(`http://localhost:4000/api/promotions/${promotionId}/products/add-and-apply-code`, {
+  const res = await fetch(`/api/promotions/${promotionId}/products/add-and-apply-code`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -123,7 +123,7 @@ export const removeCodeFromPromotion = async (promotionId, codes) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (!token) return;
 
-  const res = await fetch(`http://localhost:4000/api/promotions/${promotionId}/codes/remove`,  {
+  const res = await fetch(`/api/promotions/${promotionId}/codes/remove`,  {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -143,7 +143,7 @@ export const removeProductFromPromotion = async (promotionId, productId) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (!token) return;
 
-  const res = await fetch(`http://localhost:4000/api/promotions/${promotionId}/products/remove-product`,  {
+  const res = await fetch(`/api/promotions/${promotionId}/products/remove-product`,  {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -163,7 +163,7 @@ export const updatePromotion = async (promotionId, updatedData) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (!token) return;
 
-  const res = await fetch(`http://localhost:4000/api/promotions/${promotionId}`, {
+  const res = await fetch(`/api/promotions/${promotionId}`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -186,7 +186,7 @@ export const togglePromotionStatus = async (promotionId) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (!token) return;
 
-  const res = await fetch(`http://localhost:4000/api/promotions/${promotionId}`, {
+  const res = await fetch(`/api/promotions/${promotionId}`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${token}`,

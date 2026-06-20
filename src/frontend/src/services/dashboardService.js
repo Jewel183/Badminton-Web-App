@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:4000/api/dashboard'; // <-- THAY ĐỔI NẾU CẦN
+const BASE_URL = "/api/dashboard";
 
 const commonHeaders = {
   'Content-Type': 'application/json',

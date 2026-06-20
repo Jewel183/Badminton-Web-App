@@ -2,7 +2,7 @@ export const fetchCart = async () => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token')
     if (!token) return
 
-  const response = await fetch('http://localhost:4000/api/cart', {
+  const response = await fetch("/api/cart", {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -22,7 +22,7 @@ export const updateCartItemQuantity = async (variantId, payload) => {
     if (!token) return;
 
   // Không cần thay đổi gì ở đây. Hàm này chỉ gửi payload được truyền vào.
-  const response = await fetch(`http://localhost:4000/api/cart/${variantId}`, {
+  const response = await fetch(`/api/cart/${variantId}`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ export const removeItemFromCart = async (variantId, payload) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     if (!token) return;
 
-  const res = await fetch(`http://localhost:4000/api/cart/${variantId}`, {
+  const res = await fetch(`/api/cart/${variantId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const addItemToCart = async ({ productId, variantId, optionId, quantity }
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (!token) return;
 
-  const res = await fetch('http://localhost:4000/api/cart', {
+  const res = await fetch("/api/cart", {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ export const clearAllCart = async () => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (!token) return;
 
-  const res = await fetch('http://localhost:4000/api/cart', {
+  const res = await fetch("/api/cart", {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -107,7 +107,7 @@ export const removeSelectedItemsFromCart = async (items) => {
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     if (!token) return;
 
-  const res = await fetch(`http://localhost:4000/api/cart/items/bulk`, {
+  const res = await fetch("/api/cart/items/bulk", {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
