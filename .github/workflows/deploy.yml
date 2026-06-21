@@ -13,7 +13,12 @@ jobs:
       - name: Get the latest source code
         uses: actions/checkout@v4
 
-      - name: Deployment via SSH to AWS EC2
+      - name: Set up Tailscale VPN
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+
+      - name: Deployment via SSH over Tailnet
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.AWS_EC2_HOST }}
