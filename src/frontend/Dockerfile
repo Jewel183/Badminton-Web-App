@@ -2,6 +2,9 @@ FROM node:20-alpine AS build-stage
 
 WORKDIR /app
 
+RUN apk update && apk upgrade --no-cache
+RUN npm install -g npm@latest
+
 COPY package*.json ./
 
 RUN npm install --legacy-peer-deps
@@ -12,6 +15,8 @@ RUN npm run build
 
 # --- STAGE NGINX ---
 FROM nginx:alpine
+
+RUN apk update && apk upgrade --no-cache
 
 RUN rm /etc/nginx/conf.d/default.conf
 
