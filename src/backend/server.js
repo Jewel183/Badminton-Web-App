@@ -37,7 +37,11 @@ app.get("/", (req, res) => {
     res.send("Express App is running successfully!");
 });
 
-app.listen(port, (error) => {
+app.get("/api/health", (req, res) => {
+    res.status(200).json({ status: "OK" });
+});
+
+app.listen(port, "0.0.0.0", (error) => {
     if (!error) {
         console.log("Server started on port: " + port);
     } else {
