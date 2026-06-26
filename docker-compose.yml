@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   backend:
     image: ${DOCKER_USERNAME}/badminton-backend:${IMAGE_TAG:-latest}

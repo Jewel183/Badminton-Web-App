@@ -12,7 +12,7 @@ FROM alpine:3.24
 
 WORKDIR /app
 
-RUN apk update && apk upgrade --no-cache && apk add --no-cache curl
+RUN apk update && apk upgrade --no-cache && apk add --no-cache nodejs curl
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./
