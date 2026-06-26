@@ -1,14 +1,12 @@
-FROM node:20-alpine
+FROM node:24.18.0-alpine
 
 WORKDIR /app
 
 RUN apk update && apk upgrade --no-cache && apk add --no-cache curl
 
-RUN npm install -g npm@latest
-
 COPY package*.json ./
 
-RUN npm install --omit=dev
+RUN npm ci --omit=dev
 
 COPY . .
 
