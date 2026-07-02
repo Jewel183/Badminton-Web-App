@@ -1,4 +1,4 @@
-FROM node:24.18.0-alpine AS build-stage
+FROM node:24.18.0-alpine3.23 AS build-stage
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ COPY . .
 RUN npm run build
 
 # --- STAGE NGINX ---
-FROM nginx:alpine
+FROM nginx:1.31.2-alpine3.23
 
 RUN apk update && apk upgrade --no-cache
 

@@ -44,6 +44,28 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  node_exporter:
+    image: prom/node-exporter:v1.11.1
+    container_name: node_exporter
+    command: 
+      - '--path.rootfs=/host'
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
+
+  cadvisor:
+    image: ghcr.io/google/cadvisor:v0.60
+    container_name: cadvisor
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - '/:/rootfs:ro'
+      - '/var/run:/var/run:rw'
+      - '/sys:/sys:ro'
+      - '/var/lib/docker/:/var/lib/docker:ro'
+
 networks:
   app_network:
     driver: bridge
