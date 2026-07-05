@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+  
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
 
 env:
   IMAGE_BACKEND: ${{ secrets.DOCKER_USERNAME }}/badminton-backend
@@ -113,6 +120,7 @@ jobs:
     name: Production Deployment
     needs: [image_scan]
     runs-on: ubuntu-24.04
+    environment: production
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
@@ -122,13 +130,13 @@ jobs:
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
 
-      - name: Copy docker-compose via internal SCP
+      - name: Copy docker-compose & monitoring config via internal SCP
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.AWS_EC2_HOST }}
           username: ${{ secrets.AWS_EC2_USERNAME }}
           key: ${{ secrets.AWS_EC2_SSH_KEY }}
-          source: "docker-compose.yml"
+          source: "docker-compose.yml, prometheus/prometheus.yml"
           target: "~/Badminton-Web-App"
 
       - name: Deploy via Internal SSH Tunnel
@@ -158,10 +166,27 @@ jobs:
           username: ${{ secrets.AWS_EC2_USERNAME }}
           key: ${{ secrets.AWS_EC2_SSH_KEY }}
           script: |
+            set -e
+            cd ~/Badminton-Web-App
             echo "Waiting for app to be ready"
             sleep 15
 
             echo "Checking health endpoint"
             curl -f http://localhost/api/health || exit 1
+
+            echo "Checking all containers are running"
+            NOT_RUNNING=$(docker compose ps --status exited --status dead -q)
+            if [ -n "$NOT_RUNNING" ]; then
+              echo "Some containers are not running:"
+              docker compose ps
+              exit 1
+            fi
+
+            echo "Checking prometheus targets are healthy"
+            UNHEALTHY_TARGETS=$(docker run --rm --network container:prometheus curlimages/curl -s http://localhost:9090/api/v1/targets | grep -o '"health":"[a-z]*"' | grep -v '"up"' | wc -l)
+            if [ "$UNHEALTHY_TARGETS" -gt 0 ]; then
+              echo "Some Prometheus targets are unhealthy"
+              exit 1
+            fi
 
             echo "App is healthy"
