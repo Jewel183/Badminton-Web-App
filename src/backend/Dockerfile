@@ -19,6 +19,8 @@ RUN apk update && apk upgrade --no-cache \
 COPY --from=builder /usr/local/bin/node /usr/local/bin/node
 COPY --from=builder --chown=nodeuser:nodejs /app /app
 
+RUN mkdir -p /app/uploads && chown -R nodeuser:nodejs /app/uploads
+
 EXPOSE 4000
 USER nodeuser
 ENTRYPOINT ["/sbin/tini", "--"]
