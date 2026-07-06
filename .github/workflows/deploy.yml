@@ -145,6 +145,7 @@ jobs:
           host: ${{ secrets.AWS_EC2_HOST }}
           username: ${{ secrets.AWS_EC2_USERNAME }}
           key: ${{ secrets.AWS_EC2_SSH_KEY }}
+          command_timeout: 10m
           script: |
             set -e
             cd ~/Badminton-Web-App
@@ -165,6 +166,7 @@ jobs:
           host: ${{ secrets.AWS_EC2_HOST }}
           username: ${{ secrets.AWS_EC2_USERNAME }}
           key: ${{ secrets.AWS_EC2_SSH_KEY }}
+          command_timeout: 10m
           script: |
             set -e
             cd ~/Badminton-Web-App
