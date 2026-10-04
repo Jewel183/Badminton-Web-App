@@ -53,7 +53,7 @@ services:
     pid: host
     restart: unless-stopped
     volumes:
-      - '/:/host:ro,rslave'
+      - '/:/host:ro'
     networks:
       - monitoring_network
     logging:
