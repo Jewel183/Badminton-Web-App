@@ -13,7 +13,7 @@ FROM alpine:3.24
 WORKDIR /app
 
 RUN apk update && apk upgrade --no-cache \
-    && apk add --no-cache libstdc++ libgcc curl tini \
+    && apk add --no-cache libstdc++ libgcc curl tini ca-certificates \
     && addgroup -S nodejs && adduser -S nodeuser -G nodejs
 
 COPY --from=builder /usr/local/bin/node /usr/local/bin/node

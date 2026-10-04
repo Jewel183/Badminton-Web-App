@@ -16,6 +16,7 @@ pnpm-debug.log
 dist/
 build/
 out/
+uploads/
 
 # 4. Hệ thống quản lý mã nguồn và cấu hình hạ tầng
 .git/

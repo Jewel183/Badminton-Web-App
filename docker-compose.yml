@@ -43,6 +43,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+        compress: "true"
 
   node_exporter:
     image: prom/node-exporter:v1.11.1
@@ -60,11 +61,13 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+        compress: "true"
   
   cadvisor:
     image: ghcr.io/google/cadvisor:0.60.3
     container_name: cadvisor
     restart: unless-stopped
+    privileged: true
     cgroup: host
     volumes:
       - '/:/rootfs:ro'
@@ -80,6 +83,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+        compress: "true"
 
   prometheus:
     image: prom/prometheus:v3.13.0
@@ -104,6 +108,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+        compress: "true"
     
   grafana:
     image: grafana/grafana:13.0.3
@@ -127,6 +132,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+        compress: "true"
 
 volumes:
   prometheus_data:

@@ -17,8 +17,6 @@ FROM nginx:1.31.2-alpine3.23
 
 RUN apk update && apk upgrade --no-cache
 
-RUN rm /etc/nginx/conf.d/default.conf
-
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
